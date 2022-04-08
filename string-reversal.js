@@ -8,4 +8,11 @@ const reverseString = (string) => {
     console.log(newString)
 };
 
-reverseString("FART");
+const tests = [
+    "FART",
+    "LOSER",
+    "HELLO THERE",
+    "THESE AREN'T THE DROIDS YOU'RE LOOKING FOR"
+]
+
+tests.forEach(testString => reverseString(testString))
