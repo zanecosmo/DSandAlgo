@@ -25,23 +25,56 @@
 // flatten the head and store it
 // if head is not array AND array is only length 1 return head
 
-// return [flattenedHead, ...flatten(tail)]
-
+// first attempt
 const flatten = (arr) => {
     let head = arr[0];
     let flatHead;
     
     if (head instanceof Array) flatHead = flatten(head);
+
     if (arr.length === 1 && flatHead === undefined) return arr;
+
     if (arr.length === 1) return flatHead;
 
-    if (flatHead !== undefined) head = flatHead[0];
-
     const tail = arr.splice(1);
+    
+    if (flatHead !== undefined) return [...flatHead, ...flatten(tail)]
+
     return [head, ...flatten(tail)];
 }
 
-console.log(flatten([1, 2, 3, [4, 5] ]));
+// second attempt (inspired by student solution)
+// if arr.length === 0 return finalArray
+// if head is array, flatten it
+// if it is number, push it to final array
+// splice, return flattened tail
+const flat = (arr, finalArr = []) => {
+    if (arr.length === 0) return finalArr;
+    if (arr[0] instanceof Array) flat(arr[0], finalArr);
+    else finalArr.push(arr[0]);
+    return flat(arr.splice(1), finalArr);
+}
+
+console.log(flatten([1, 2, 3, [4, 5]]));
 console.log(flatten([1, [2, [3, 4], [[5]]]]));
 console.log(flatten([[1],[2],[3]]));
 console.log(flatten([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]]));
+console.log("=====");
+console.log(flat([1, 2, 3, [4, 5]]));
+console.log(flat([1, [2, [3, 4], [[5]]]]));
+console.log(flat([[1],[2],[3]]));
+console.log(flat([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]]));
+
+// student solution
+// const flatten2 = (arr, vector = []) => {
+// if (arr.length === 0) return vector;
+// if (arr[0] instanceof Array) flatten2(arr[0], vector);
+// else vector.push(arr[0]);
+
+// return flatten2(arr.splice(1, arr.length), vector); // i think the arr.length was screwing up this version
+// }
+
+// console.log(flatten2([1, 2, 3, [4, 5] ]));
+// console.log(flatten2([1, [2, [3, 4], [[5]]]]));
+// console.log(flatten2([[1],[2],[3]]));
+// console.log(flatten2([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]]));
