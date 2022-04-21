@@ -55,24 +55,24 @@ class SinglyLinkedList {
 
         const CURRENT_NODE = this.head;
 
-        let oldHead;
+        let oldHead; // tried to name these variables discriptively, because the logic of working with "node", "next", and "prev" is just too hard to follow
         let headToBe
         let looseEnd;
         
         while (CURRENT_NODE.next !== null) {
-            oldHead = this.head;
+            oldHead = this.head; // get the current head
 
-            headToBe = CURRENT_NODE.next;
-            looseEnd = headToBe.next;
+            headToBe = CURRENT_NODE.next; // the item in front of the current node
+            looseEnd = headToBe.next; // the item in front of the soon to be head item, it will be disconnected upon setting head to point to the old head
             
-            this.head = headToBe;
-            this.head.next = oldHead;
-            CURRENT_NODE.next = looseEnd;
+            this.head = headToBe; // moving the item in front of current node to the head position
+            this.head.next = oldHead; // pointing the new head to the old head
+            CURRENT_NODE.next = looseEnd; // pointing the current node to the disconnected complete tail of the list
         }
 
-        this.tail = CURRENT_NODE;
+        this.tail = CURRENT_NODE; // setting the current node, which is now at the end of the list, to the tail
 
-        return this;
+        return this; // return the whole damn thing
     }
 
     get(position) {
