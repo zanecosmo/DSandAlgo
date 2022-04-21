@@ -35,20 +35,36 @@ const list = new utils.SinglyLinkedList();
 // list.set(3, "EVILDOER");
 // console.log(list.get(3));
 
-console.log(list._insert(0, "ONE"));
-console.log(list.length);
-console.log(list.head);
-list._insert(0, "TWO");
-console.log(list.length);
-console.log(list.head);
-list._insert(1, "THREE");
-console.log(list.length);
-console.log(list.head);
-console.log(list._insert(0, "FOUR"));
-console.log(list.head);
+// console.log(list._insert(0, "ONE"));
+// console.log(list.length);
+// console.log(list.head);
+// list._insert(0, "TWO");
+// console.log(list.length);
+// console.log(list.head);
+// list._insert(1, "THREE");
+// console.log(list.length);
+// console.log(list.head);
+// console.log(list._insert(0, "FOUR"));
+// console.log(list.head);
 
-console.log(list._insert(-1, "FOUR"));
+// console.log(list._insert(-1, "FOUR"));
 
 
-console.log(list.remove(3));
-console.log(list.remove(1));
+// console.log(list.remove(3));
+// console.log(list.remove(1));
+list.push(1);
+list.push(2);
+list.push(3);
+list.push(4);
+list.push(5);
+list._reverse();
+
+const logInOrder = (node) => {
+    console.log(node.value);
+    if (node.next === null) return;
+    logInOrder(node.next);
+}
+
+logInOrder(list.head);
+console.log(list.head);
+console.log(list.tail);

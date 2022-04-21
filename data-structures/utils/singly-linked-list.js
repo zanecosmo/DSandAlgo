@@ -15,6 +15,66 @@ class SinglyLinkedList {
         this.tail = null;
     }
 
+    reverse(newTail = this.head) {        //   5 4 3 2 1 null
+        // if start.next === null, return this
+        // 
+        // store to this.head
+        // store tthis.head.next
+        // store this.head.next.next
+
+        // next to head
+        // st head.next to previous head
+        // set hprevhead.next to head.next.next
+
+        // reverse(head.next)
+
+        if (newTail.next === null) {
+            this.tail = newTail;
+            return this;
+        }
+
+        const oldHead = this.head;
+        const newHead = newTail.next;
+        const newNext = newHead.next;
+
+        this.head = newHead;
+        newHead.next = oldHead;
+        newTail.next = newNext;
+
+        return this.reverse(newTail);
+    }
+
+    _reverse() {
+        // take current node
+        // store the one in front of the one in front of it
+        // put the one in front of it to the head
+        // connect this new head to the old one
+        // connect the current node to the one that was in front of the one in front of it
+
+        // set tail to the last element
+
+        const CURRENT_NODE = this.head;
+
+        let oldHead;
+        let headToBe
+        let looseEnd;
+        
+        while (CURRENT_NODE.next !== null) {
+            oldHead = this.head;
+
+            headToBe = CURRENT_NODE.next;
+            looseEnd = headToBe.next;
+            
+            this.head = headToBe;
+            this.head.next = oldHead;
+            CURRENT_NODE.next = looseEnd;
+        }
+
+        this.tail = CURRENT_NODE;
+
+        return this;
+    }
+
     get(position) {
         let node = this.getNode(position);
         if (node === undefined) return undefined;
