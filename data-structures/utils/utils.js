@@ -1,3 +1,3 @@
 module.exports = {
-    SinglyLinkedList: require("./linked-list.js")
+    SinglyLinkedList: require("./singly-linked-list.js")
 }
