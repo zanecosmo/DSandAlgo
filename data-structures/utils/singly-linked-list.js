@@ -76,9 +76,7 @@ class SinglyLinkedList {
     }
 
     get(position) {
-        let node = this.getNode(position);
-        if (node === undefined) return undefined;
-        return node.value
+        return this.getNode(position).value;
     }
 
     getNode(position) {
