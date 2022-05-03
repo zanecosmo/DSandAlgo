@@ -19,12 +19,12 @@ class Queue {
         return ++this.length;
     }
 
-    dequeue() {
+    dequeue(type) {
         if (this.length === 0) return undefined;
         const NODE = this.first;
         this.first = NODE.next;
         this.length--;
-        return NODE.value;
+        return type === "node" ? NODE : NODE.value;
     }
 }
 
