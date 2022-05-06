@@ -1,25 +1,15 @@
-const utils = require("./utils/utils.js");
+const classes = require("./classes/classes.js");
 
-const priorityQueue = new utils.PriorityQueue();
+const stringData = new classes.DataGenerator();
 
-priorityQueue.enqueue("fart", 7);
-priorityQueue.enqueue("poop", 6);
-priorityQueue.enqueue("bleeding", 2);
-priorityQueue.enqueue("disemboweled", 0);
-priorityQueue.enqueue("punched in the face", 2);
-priorityQueue.enqueue("splinter", 3);
-priorityQueue.enqueue("clipped your fingernails too short", 7);
-priorityQueue.enqueue("stubbed toe", 4);
-priorityQueue.enqueue("punched in the balls", -4);
+const graph = new classes.Graph();
 
-console.log(priorityQueue.values);
+stringData.generateVertices(graph);
+stringData.generateEdges(graph, 20)
 
-console.log(priorityQueue.dequeue());
-console.log(priorityQueue.dequeue());
-console.log(priorityQueue.dequeue());
-console.log(priorityQueue.dequeue());
-console.log(priorityQueue.dequeue());
-console.log(priorityQueue.dequeue());
-console.log(priorityQueue.dequeue());
-console.log(priorityQueue.dequeue());
-console.log(priorityQueue.dequeue());
+console.log(graph.adjacencyList);
+
+console.log(graph.BFS(stringData.stringArray[0]));
+console.log(graph._BFS(stringData.stringArray[0]));
+console.log(graph.__BFS(stringData.stringArray[0]));
+console.log(graph.BFSRecursive(stringData.stringArray[0]));

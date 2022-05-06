@@ -5,5 +5,9 @@ module.exports = {
     Queue: require("./queue.js"),
     BinarySearchTree: require("./binary-search-tree.js"),
     MaxBinaryHeap: require("./max-binary-heap.js"),
-    PriorityQueue: require("./priority-queue.js")
+    PriorityQueue: require("./priority-queue.js"),
+    HashMap: require("./hash-map.js"),
+    Graph: require("./graph.js"),
+    DataGenerator: require("./data-generator"),
+    hash: require("./hash.js")
 }
