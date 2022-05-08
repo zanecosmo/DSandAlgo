@@ -9,5 +9,7 @@ module.exports = {
     HashMap: require("./hash-map.js"),
     Graph: require("./graph.js"),
     DataGenerator: require("./data-generator"),
+    WeightedGraph: require("./weighted-graph.js"),
+    shortestPath: require("./dijkstra.js"),
     hash: require("./hash.js")
 }

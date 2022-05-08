@@ -1,36 +1,42 @@
+const WeightedGraph = require("./weighted-graph.js");
+
 class dataGenerator {
     constructor() {
         this.stringArray = this.generateStringArray();
+        this.maxEdges = this.determineMaxEdges(this.stringArray.length);
+        // console.log(this.stringArray.length);
+        // console.log(this.maxEdges)
+    }
+
+    determineMaxEdges(vertexQuantity) {
+        return (vertexQuantity * (vertexQuantity - 1)) / 2;
     }
 
     randomNumber(maxNumber = 10) {
-        return Math.floor(Math.random() * (maxNumber));
+        return Math.floor(Math.random() * (maxNumber + 1));
     }
 
-    makeString(length) {
-        let string = "";
-        const CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        for (let i = 0; i < length; i++) {
-            const randomIndex = this.randomNumber(CHARACTERS.length)
-            string += CHARACTERS.charAt(randomIndex);
-        }
-        return string;
-    }
+    makeString() {
+        const randomLength = this.randomNumber();
+        if (randomLength < 1) return this.makeString();
 
-    generateStrings(stringQuanitity) {
-        const strings = [];
-        for (let i = 0; i < stringQuanitity; i++) {
-            const randomLength = this.randomNumber();
-            if (randomLength < 1) return this.generateStrings(stringQuanitity);
-            const randomString = this.makeString(randomLength);
-            strings.push(randomString);
+        const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        
+        const characters = [];
+        for (let i = 0; i < randomLength; i++) {
+            const randomIndex = this.randomNumber(ALPHABET.length - 1);
+            characters.push(ALPHABET.charAt(randomIndex));
         }
-        return strings;
+        return characters.join("");
     }
 
     generateStringArray (arrayLength = this.randomNumber()) {
         if (arrayLength === 0) return this.generateStringArray();
-        const stringArray = this.generateStrings(arrayLength);
+        const stringArray = [];
+        for (let i = 0; i < arrayLength; i++) {
+            const randomString = this.makeString();
+            stringArray.push(randomString);
+        }
         return stringArray;
     }
 
@@ -44,12 +50,15 @@ class dataGenerator {
         for (const string of this.stringArray) graph.addVertex(string);
     }
 
-    generateEdges (graph, edgeQuantity = this.randomNumber()) {
-        if (edgeQuantity === 0) this.generateEdges(graph);
+    generateEdges (graph, edgeQuantity = this.randomNumber(this.maxEdges)) {
+        if (this.maxEdges !== 0 && edgeQuantity === 0) this.generateEdges(graph);
         for (let i = 0; i < edgeQuantity; i++) {
             const string1 = this.retrieveRandomString();
             const string2 = this.retrieveRandomString();
-            if (string1 !== string2) graph.addEdge(string1, string2);
+            if (string1 === string2) continue;
+
+            if (graph instanceof WeightedGraph) graph.addEdge(string1, string2, this.randomNumber(100));
+            else graph.addEdge(string1, string2);
         }
     }
 }

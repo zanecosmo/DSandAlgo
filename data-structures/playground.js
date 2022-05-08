@@ -2,14 +2,16 @@ const classes = require("./classes/classes.js");
 
 const stringData = new classes.DataGenerator();
 
-const graph = new classes.Graph();
+const graph = new classes.WeightedGraph();
 
 stringData.generateVertices(graph);
-stringData.generateEdges(graph, 20)
+stringData.generateEdges(graph);
 
 console.log(graph.adjacencyList);
 
-console.log(graph.BFS(stringData.stringArray[0]));
-console.log(graph._BFS(stringData.stringArray[0]));
-console.log(graph.__BFS(stringData.stringArray[0]));
-console.log(graph.BFSRecursive(stringData.stringArray[0]));
+const start = stringData.stringArray[0];
+const end = stringData.stringArray[stringData.stringArray.length - 1];
+
+const result = classes.shortestPath(start, end, graph);
+
+console.log("RESULT:", result);
